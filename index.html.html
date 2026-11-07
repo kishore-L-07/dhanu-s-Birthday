@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#8b6bc0">
+<title>Dhanu's Magical Birthday 💜</title>
+<style>
+:root{--purple:#8b6bc0;--deep:#65458f;--lav:#eee5fb;--pale:#fbf8ff;--ink:#49385f;--line:#dfd1f1}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink)}
+body{background:linear-gradient(145deg,#fffaff,#eee5fb 58%,#faf7ff);overflow-x:hidden}
+button{font:inherit;cursor:pointer}
+.bg{position:fixed;inset:0;pointer-events:none;opacity:.35;background-image:radial-gradient(#fff 1.5px,transparent 1.5px),radial-gradient(#b69bdf 1px,transparent 1.5px);background-size:48px 48px,83px 83px;z-index:0}
+header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:13px 17px;background:#ffffffc9;backdrop-filter:blur(10px);border-bottom:1px solid #eadff7}
+.logo{font-weight:800;font-size:.85rem;letter-spacing:.08em;color:var(--deep)}
+.counter{font-size:.78rem;color:#8065a6}
+main{position:relative;z-index:1;min-height:calc(100svh - 125px);display:grid;place-items:center;padding:20px 16px 28px}
+.page{display:none;width:min(100%,620px);animation:enter .35s ease}
+.page.active{display:block}
+@keyframes enter{from{opacity:0;transform:translateX(16px)}to{opacity:1;transform:translateX(0)}}
+.card{background:#ffffffdf;border:1px solid var(--line);border-radius:27px;padding:clamp(22px,6vw,42px);box-shadow:0 15px 40px #684b8917;text-align:center}
+.kicker{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:#987bc1}
+h1{font-family:Georgia,serif;font-size:clamp(2.5rem,12vw,5rem);line-height:1.02;color:var(--deep);margin:13px 0}
+h2{font-family:Georgia,serif;font-size:clamp(1.8rem,8vw,2.7rem);color:var(--deep);margin:8px 0 14px}
+p{line-height:1.75;font-size:1rem}
+.hero-panda{font-size:5rem;display:block;animation:bob 3s infinite ease-in-out}
+@keyframes bob{50%{transform:translateY(-9px) rotate(4deg)}}
+.btn{border:0;border-radius:999px;padding:14px 23px;background:linear-gradient(120deg,#a487d2,#7654ad);color:white;font-weight:700;box-shadow:0 8px 18px #7654ad33;min-height:48px}
+.btn.light{background:#fff;color:var(--deep);border:1px solid var(--line);box-shadow:none}
+.btn:active{transform:scale(.98)}
+.actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:24px}
+.small{font-size:.85rem;color:#89789e}
+.countdown{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:20px 0}
+.time{background:#f6f0ff;border:1px solid #e7dbf7;border-radius:15px;padding:11px 12px;min-width:65px}
+.time b{display:block;font-size:1.45rem;color:var(--deep)}
+.time span{font-size:.65rem;letter-spacing:.08em}
+.letter{text-align:left;line-height:1.9}
+.letter .dear{font-family:Georgia,serif;font-size:1.35rem;color:var(--deep);font-weight:bold}
+.purple{color:var(--deep);font-weight:800}
+.tiles{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tile{background:#faf7ff;border:1px solid var(--line);border-radius:19px;padding:17px 12px}
+.tile .emoji{font-size:2.35rem}
+.tile h3{margin:7px 0;color:var(--deep);font-size:1rem}
+.tile p{font-size:.84rem;margin:0;line-height:1.5}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.photo{min-height:155px;border:2px dashed #c8b4e8;background:#faf7ff;border-radius:18px;display:grid;place-items:center;overflow:hidden;padding:9px}
+.photo label{font-weight:700;color:var(--deep);font-size:.9rem;cursor:pointer}
+.photo input{display:none}
+.photo {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    border-radius: 18px;
+    padding: 8px;
+    background: #faf7ff;
+}
+
+.photo img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 12px;
+    display: block;
+}
+.quiz-option{width:100%;padding:13px;margin:6px 0;border:1px solid var(--line);border-radius:14px;background:#faf7ff;color:var(--ink);font-weight:600}
+.quiz-option:disabled{opacity:.7}
+.result{min-height:30px;color:var(--deep);font-weight:800}
+footer{position:relative;z-index:2;text-align:center;padding:12px 10px calc(12px + env(safe-area-inset-bottom));background:#ffffffa8;border-top:1px solid #eadff7}
+.navbuttons{display:flex;justify-content:space-between;align-items:center;gap:12px;max-width:620px;margin:auto}
+.navbuttons button{min-width:112px}
+.dots{display:flex;gap:5px;justify-content:center;flex:1}
+.dot{width:7px;height:7px;border-radius:50%;background:#d8c9ec}
+.dot.on{background:var(--purple);width:19px;border-radius:9px}
+.secret{display:none;background:#f4edff;border-radius:18px;padding:18px;margin-top:15px}
+@media(max-width:380px){.card{padding:20px 16px}.tiles{gap:8px}.tile{padding:13px 8px}.navbuttons button{min-width:94px;padding:12px 15px}}
+</style>
+</head>
+<body>
+<div class="bg"></div>
+<header><div class="logo">✦ DHANU'S LITTLE WORLD ✦</div><div class="counter" id="counter">PAGE 1 / 7</div></header>
+<main>
+<section class="page active" data-title="Welcome">
+ <div class="card">
+  <span class="hero-panda">🐼</span>
+  <div class="kicker">A magical little surprise for</div>
+  <h1>Happy<br>Birthday!<span style="display:block;font:700 .37em system-ui;letter-spacing:.08em;margin-top:12px">DHANUSHREE S</span></h1>
+  <p>Hey Dhanuuu! 💜 Innaiku un day! Konjam magic, konjam madness, neraya smiles — everything just for you, kolanthaa!</p>
+  <div class="countdown" id="countdown"></div>
+  <p class="small">November 9, 2026 · Your fairytale day</p>
+  <div class="actions"><button class="btn" onclick="go(1)">Open your surprise ✨</button></div>
+ </div>
+</section>
+
+<section class="page" data-title="Birthday letter">
+ <div class="card">
+  <div class="kicker">Page 2 · From the heart</div><h2>A little letter 💌</h2>
+  <div class="letter">
+   <div class="dear">Dear Dhanu / Kolanthaaa, 🥹💜</div>
+   <p>Happy Birthday daaa! Unakku indha year full-ah happiness, peace, nalla memories, and lots of cute little moments kedaikkanum. Nee eppovume ipdiye un girly, funny, adorable self-ah iru!</p>
+   <p>Un Cinderella dreams, unicorn magic, Pegasus vibes ellam nijamaagattum. Especially <span class="purple">Tangled</span> world madhiri oru magical day unakku kedaikkanum!</p>
+   <p>Na sogama irukkumbodhu nee "kalutha" "savaachuruven" nu solluva… 😂 Adha kekkumbodhu naan flat aagiduven da! Unoda andha dialogue-um, namma memories-um romba special.</p>
+   <p>Indha birthday-la nee sirikkura ovvoru second-um unakku thirumbi varanum. Stay happy, stay magical, and never stop being the cute kolanthaa you are!</p>
+   <p class="purple">Once again, Happiest Birthday Dhanushree! Love, laughter & lots of pandas! 💜</p>
+  </div>
+ </div>
+</section>
+
+<section class="page" data-title="Fairytale">
+ <div class="card">
+  <div class="kicker">Page 3 · Your magical universe</div><h2>Fairytale corner 🏰</h2>
+  <p>Unakku pidicha magical characters ellam inga special place pudichirukku!</p>
+  <div class="tiles">
+   <div class="tile"><div class="emoji">🏮</div><h3>Rapunzel</h3><p>Golden lanterns, long hair and endless dreams.</p></div>
+   <div class="tile"><div class="emoji">🤴</div><h3>Flynn Rider</h3><p>Charming, funny and full of adventure.</p></div>
+   <div class="tile"><div class="emoji">🐴</div><h3>Maximus</h3><p>Tangled-la scene-stealer! Strict but adorable.</p></div>
+   <div class="tile"><div class="emoji">🦄</div><h3>Unicorn magic</h3><p>Because every day needs a little sparkle.</p></div>
+   <div class="tile"><div class="emoji">🪽</div><h3>Pegasus</h3><p>Dream big and fly beyond the clouds.</p></div>
+   <div class="tile"><div class="emoji">🐼</div><h3>Panda kingdom</h3><p>Official mascot of our purple princess!</p></div>
+  </div>
+ </div>
+</section>
+
+
+
+<section class="page" data-title="Birthday quiz">
+ <div class="card">
+  <div class="kicker">Page 5 · Just for fun</div><h2>Birthday quiz 🎀</h2>
+  <p id="question">Which colour rules Dhanu's kingdom?</p>
+  <div id="options">
+   <button class="quiz-option" onclick="answer(0)">Ocean blue 💙</button>
+   <button class="quiz-option" onclick="answer(1)">Purple / Lavender 💜</button>
+   <button class="quiz-option" onclick="answer(2)">Neon green 💚</button>
+  </div>
+  <div class="result" id="quizResult"></div>
+  <button class="btn light" id="nextQ" style="display:none" onclick="nextQuestion()">Next question ➜</button>
+ </div>
+</section>
+
+<section class="page" data-title="Secret surprise">
+ <div class="card">
+  <div class="kicker">Page 6 · A secret is waiting</div><div style="font-size:4rem">🎁</div><h2>One last surprise!</h2>
+  <p>Birthday girl, ready-ah? Indha button press pannu!</p>
+  <button class="btn" onclick="reveal()">Open your magic ✨</button>
+  <div class="secret" id="secret"><div style="font-size:3rem">🐼💜🏮</div><h3>To our birthday princess, Dhanu!</h3><p>Un life oru fairytale madhiri irukkanum — every chapter-la happiness, every page-la laughter, every night-la peaceful dreams. And whenever life feels a little heavy, remember: unakku support panna friends irukkaanga.</p><p><b>Keep shining, keep dreaming, keep being YOU. Happy Birthday, Kolanthaaa! 💜</b></p></div>
+ </div>
+</section>
+
+<section class="page" data-title="Final wishes">
+ <div class="card">
+  <span class="hero-panda">🐼</span><div class="kicker">Page 7 · The end… and a new chapter</div>
+  <h2>Keep shining, Dhanu! 💜</h2>
+  <p>Unakku pidicha purple sky, Tangled lanterns, cute pandas, and endless happiness — idhellam un life full-ah irukkanum!</p>
+  <p class="purple" style="font-size:1.2rem">HAPPIEST BIRTHDAY, KOLANTHAAA! 🎂</p>
+  <div class="actions"><button class="btn light" onclick="go(0)">↺ Start again</button></div>
+ </div>
+</section>
+</main>
+<footer><div class="navbuttons">
+ <button class="btn light" id="prev" onclick="go(current-1)" disabled>← Back</button>
+ <div class="dots" id="dots"></div>
+ <button class="btn" id="next" onclick="go(current+1)">Next →</button>
+</div></footer>
+<script>
+const pages=[...document.querySelectorAll('.page')];let current=0;
+const dots=document.getElementById('dots');
+pages.forEach((_,i)=>{const d=document.createElement('span');d.className='dot'+(i===0?' on':'');dots.appendChild(d)});
+function go(n){if(n<0||n>=pages.length)return;pages[current].classList.remove('active');current=n;pages[current].classList.add('active');document.getElementById('counter').textContent=`PAGE ${current+1} / ${pages.length}`;document.getElementById('prev').disabled=current===0;document.getElementById('next').style.display=current===pages.length-1?'none':'inline-block';[...dots.children].forEach((d,i)=>d.classList.toggle('on',i===current));window.scrollTo({top:0,behavior:'smooth'})}
+const target=new Date('2026-11-09T00:00:00');
+function updateCountdown(){let diff=target-new Date(),el=document.getElementById('countdown');if(diff<=0){el.innerHTML='<div class="time"><b>🎂</b><span>YOUR DAY!</span></div>';return}let vals=[[Math.floor(diff/86400000),'DAYS'],[Math.floor(diff%86400000/3600000),'HOURS'],[Math.floor(diff%3600000/60000),'MINS'],[Math.floor(diff%60000/1000),'SECS']];el.innerHTML=vals.map(v=>`<div class="time"><b>${v[0]}</b><span>${v[1]}</span></div>`).join('')}
+updateCountdown();setInterval(updateCountdown,1000);
+function loadPhoto(input){if(!input.files||!input.files[0])return;let reader=new FileReader();reader.onload=e=>{let box=input.closest('.photo');box.innerHTML=`<img src="${e.target.result}" alt="Birthday memory"><label style="display:block;margin-top:7px;color:#65458f">Change photo<input type="file" accept="image/*" onchange="loadPhoto(this)"></label>`};reader.readAsDataURL(input.files[0])}
+const qs=[{q:'Which colour rules Dhanu’s kingdom?',o:['Ocean blue 💙','Purple / Lavender 💜','Neon green 💚'],a:1,yes:'Correct! Purple queen forever! 👑💜'},{q:'Which magical movie world does Dhanu love?',o:['Tangled 🏮','Cars 🚗','Finding Nemo 🐠'],a:0,yes:'Yesss! Rapunzel and the lanterns! 🏮'},{q:'Who is the iconic horse in Tangled?',o:['Spirit 🐎','Maximus 🐴','Bullseye 🤠'],a:1,yes:'Maximus! The real scene-stealer! 😂'}];let qi=0;
+function answer(i){let q=qs[qi];document.querySelectorAll('#options button').forEach(b=>b.disabled=true);document.getElementById('quizResult').textContent=i===q.a?q.yes:'Aiyo! Not quite — next one try pannalaam! 😄';document.getElementById('nextQ').style.display='inline-block'}
+function nextQuestion(){qi++;if(qi>=qs.length){document.getElementById('question').textContent='Quiz completed! 🎉';document.getElementById('options').innerHTML='';document.getElementById('quizResult').textContent='Official Queen of this magical kingdom! 💜';document.getElementById('nextQ').style.display='none';return}document.getElementById('question').textContent=qs[qi].q;document.getElementById('options').innerHTML=qs[qi].o.map((v,i)=>`<button class="quiz-option" onclick="answer(${i})">${v}</button>`).join('');document.getElementById('quizResult').textContent='';document.getElementById('nextQ').style.display='none'}
+function reveal(){document.getElementById('secret').style.display='block'}
+</script>
+</body>
+</html>
